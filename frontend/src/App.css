@@ -29,6 +29,7 @@ body {
 .bars {
   color: var(--text);
 }
+
 .navtxt {
   display: flex;
   gap: 25px;
@@ -40,6 +41,16 @@ body {
 .navtxt li:hover {
   color: var(--navhover-text);
 }
+/* Hover effect for dropdown */
+.hover-dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; /* Adjusts the position of the dropdown */
+}
+
+.hover-dropdown .dropdown-menu {
+  display: none;
+}
+
 .ml {
   margin-left: 190px;
 }
@@ -58,6 +69,13 @@ body {
 .card-icon:hover {
   cursor: pointer;
   transform: scale(1.2);
+}
+.ataguse a {
+  text-decoration: none;
+  color: white;
+}
+.ataguse a:hover {
+  color: var(--navhover-text);
 }
 /* Navbar */
 /* hero */
@@ -103,79 +121,116 @@ body {
   padding-top: 40px;
   right: 70px;
 }
-/* section 1 */
-.fourcomponent {
+/* new section 1 */
+.seconemainbox {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.lineoneicon {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  gap: 70px;
 }
-.craft {
+.bestdeal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Explore {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   font-size: 32px;
   font-weight: 500;
 }
-.firsttxt {
-  height: 300px;
-  width: 500px;
-  border: 1px solid black;
+.line {
+  border-bottom: 2px solid black;
+  width: 110px;
 }
-.donec {
+.bestdeal img {
+  height: 60px;
+  width: 60px;
+}
+.bestdeal i {
+  font-size: 60px;
+}
+.dealzonetxt {
+  font-size: 14px;
+  font-weight: 300;
+}
+.bestdeal:hover {
+  color: var(--navhover-text);
+}
+/* section 2 why choose us */
+.sectiontwo {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 160px;
+}
+.whysec {
+  height: 100%;
+  width: 650px;
+}
+.whyfirstchild {
+  font-size: 32px;
+  font-weight: 500;
+}
+.whysecondchild {
   font-size: 14px;
   font-weight: 400;
   color: var(--smalltext);
 }
-.craftbtn button {
-  height: 50px;
-  width: 120px;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.chairimg img {
-  height: 270px;
-  width: 270px;
-}
-.chairimg {
+.whyimgsec {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
 }
-
-.chairename {
-  font-size: 16px;
-  font-weight: 600;
-}
-.chaireprice {
-  font-size: 18px;
-  font-weight: 800;
-}
-.chairone {
-  position: relative;
-}
-.chairehover {
+.whyimgone {
   position: absolute;
-  overflow: hidden;
-  top: 100%;
-  left: 20px;
-  height: 0px;
-  width: 240px;
-  margin-top: -25px;
-  border-radius: 10px;
-  background-color: #dce5e4;
+}
+.whyimgtwo {
+  position: relative;
+  right: 130px;
+  bottom: 130px;
+}
+.whyimgone img {
+  height: 550px;
+  width: 500px;
+  border-radius: 20px;
+}
+.whyimgtwo img {
+  height: 280px;
+  width: 280px;
+}
+.fandfsection {
   display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: center;
-  transition: 0.5s ease;
+  flex-direction: row;
+  gap: 15px;
 }
-.chairone:hover .chairehover {
-  top: 45%;
-  height: 70%;
+.truckimg {
+  position: absolute;
+}
+.troukround {
+  position: relative;
+  height: 35px;
+  width: 35px;
+  background-color: var(--smalltext);
   opacity: 0.3;
+  border-radius: 50%;
+  top: 10px;
+  left: 20px;
 }
-.addbutton {
-  height: 50px;
-  width: 50px;
-  font-size: 40px;
-  color: black;
+.fandftxtone {
+  font-size: 14px;
+  font-weight: 500;
 }
+.fandftxttwo {
+  font-size: 14px;
+  color: var(--smalltext);
+}
+/* section 2 why choose us */
