@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import shoping_icon from "./imges/cart.svg";
 import hero_img from "./imges/hero-img.png";
 import dot_green from "./imges/dots-green.svg";
@@ -20,8 +20,60 @@ import why_img_one from "./imges/why-img-1.svg";
 import why_img_two from "./imges/why-img-2.svg";
 import why_img_three from "./imges/why-img-3.svg";
 import why_img_four from "./imges/why-img-4.svg";
+import Store_hydrabad from "./imges/store-Hyderabad.png";
+import Store_Kochi from "./imges/store-Kochi.png";
+import Store_Kolkata from "./imges/store-Kolkata.png";
+import Store_Bangloe from "./imges/store-Bangloe.png";
+import Store_Delhi from "./imges/store-Delhi.png";
+import Store_Mumbai from "./imges/store-Mumbai.png";
 
 const Home = () => {
+  // slider1
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [
+    {
+      image: Store_hydrabad,
+      title: "Hyderabad",
+      stores: "6 stores",
+    },
+    {
+      image: Store_Kochi,
+      title: "Chennai",
+      stores: "3 stores",
+    },
+    {
+      image: Store_Kolkata,
+      title: "Pune",
+      stores: "2 stores",
+    },
+    {
+      image: Store_Mumbai,
+      title: "Mumbai",
+      stores: "4 stores",
+    },
+    {
+      image: Store_Bangloe,
+      title: "Bangalore",
+      stores: "5 stores",
+    },
+    {
+      image: Store_Delhi,
+      title: "Delhi",
+      stores: "7 stores",
+    },
+  ];
+
+  const handlePrev = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === 0 ? slides.length - 2 : prevSlide - 2
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === slides.length - 2 ? 0 : prevSlide + 2
+    );
+  };
   // slider 2
 
   return (
@@ -286,7 +338,69 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {/* section 2 WHy choose Us */}
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      {/* section 2 WHy choose Us end*/}
+
+      {/* slider balck */}
+      {/* Slider Section */}
+      {/* Other sections of the component */}
+
+      {/* Slider Section */}
+      <div className="slider container">
+        <h2 className="slider-title">Visit Our Stores</h2>
+        <div className="slider-container">
+          <div className="slider-arrow prev" onClick={handlePrev}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              style={{ fill: "#ff6347" }} // Red color for prev button
+            >
+              <path d="M15.41 7.41L14 6 6 12l8 8 1.41-1.41L10.83 12z" />
+            </svg>
+          </div>
+          <div className="slider-slide">
+            <div
+              className="slides-wrapper"
+              style={{
+                transform: `translateX(-${currentSlide * (80 / 6)}%)`,
+                width: `${slides.length * (100 / 6)}%`,
+              }}
+            >
+              {slides.map((slide, index) => (
+                <div
+                  key={index}
+                  className="slide-item"
+                  style={{ width: `${100 / slides.length}%` }}
+                >
+                  <img
+                    className="sliderimg"
+                    src={slide.image}
+                    alt={slide.title}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="slider-arrow next" onClick={handleNext}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              style={{ fill: "#4682b4" }} // Blue color for next button
+            >
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+      {/* slider black */}
     </>
   );
 };
