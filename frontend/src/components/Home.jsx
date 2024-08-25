@@ -62,6 +62,49 @@ const Home = () => {
       stores: "7 stores",
     },
   ];
+  // slldier two
+  const [currentSlidetwo, setCurrentSlidetwo] = useState(0);
+
+  const nextSlidetwo = () => {
+    setCurrentSlidetwo(
+      (prevSlidetwo) => (prevSlidetwo + 1) % testimonials.length
+    );
+  };
+
+  const prevSlidetwo = () => {
+    setCurrentSlidetwo((prevSlidetwo) =>
+      prevSlidetwo === 0 ? testimonials.length - 1 : prevSlidetwo - 1
+    );
+  };
+  // slider two
+  // slidertwo
+  const testimonials = [
+    {
+      name: "Maria Jones",
+      title: "CEO, Co-Founder, XYZ Inc.",
+      quote:
+        '"Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque."',
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2HEOfGoes5UykClOXx0tFnksGKlOcqZiN2A&s", // Replace with actual image URL
+    },
+    {
+      name: "John Doe",
+      title: "CTO, ABC Corp.",
+      quote:
+        '"Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque."',
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjWFXEt8u3nfqCn_GjmZVucxSuKCJgICTnLw&s", // Replace with actual image URL
+    },
+    {
+      name: "Jane Smith",
+      title: "CMO, Example Co.",
+      quote:
+        '"Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque."',
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLl5qCjhAMm5yyRAcjXVS5P3RwzYDYWA7eag&s", // Replace with actual image URL
+    },
+  ];
+  // slidertwo
 
   const handlePrev = () => {
     setCurrentSlide((prevSlide) =>
@@ -254,6 +297,70 @@ const Home = () => {
       <br />
       <br />
       <br />
+
+      <div className="slider container">
+        <h2 className="slider-title">Visit Our Stores</h2>
+        <div className="slider-container">
+          <div className="slider-arrow prev" onClick={handlePrev}>
+            <img
+              src="https://icons.iconarchive.com/icons/fa-team/fontawesome/512/FontAwesome-Circle-Chevron-Left-icon.png"
+              alt=""
+              style={{ height: "34px", width: "34px" }}
+            />
+            {/* <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              style={{ fill: "#ff6347" }} // Red color for prev button
+            >
+              <path d="M15.41 7.41L14 6 6 12l8 8 1.41-1.41L10.83 12z" />
+            </svg> */}
+          </div>
+          <div className="slider-slide">
+            <div
+              className="slides-wrapper"
+              style={{
+                transform: `translateX(-${currentSlide * (100 / 6)}%)`,
+                width: `${slides.length * (100 / 6)}%`,
+              }}
+            >
+              {slides.map((slide, index) => (
+                <div
+                  key={index}
+                  className="slide-item"
+                  style={{ width: `${100 / slides.length}%` }}
+                >
+                  <img
+                    className="sliderimg"
+                    src={slide.image}
+                    alt={slide.title}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="slider-arrow next" onClick={handleNext}>
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS81eTXlRLgV2Gfv4cl1vX0Bwj4oFu_PaM_AtDWe04Q6PKV_cS_o_sb7kt7hyYcJsNtsSk&usqp=CAU"
+              style={{ height: "34px", width: "34px" }}
+              alt=""
+            />
+            {/* <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              style={{ fill: "#4682b4" }} // Blue color for next button
+            >
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+            </svg> */}
+          </div>
+        </div>
+      </div>
+
+      {/* slider black */}
+      <br />
+      <br />
+      <br />
       <br />
       <br />
       <br />
@@ -346,61 +453,39 @@ const Home = () => {
       <br />
       <br />
       {/* section 2 WHy choose Us end*/}
-
-      {/* slider balck */}
       {/* Slider Section */}
-      {/* Other sections of the component */}
 
-      {/* Slider Section */}
-      <div className="slider container">
-        <h2 className="slider-title">Visit Our Stores</h2>
-        <div className="slider-container">
-          <div className="slider-arrow prev" onClick={handlePrev}>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              style={{ fill: "#ff6347" }} // Red color for prev button
-            >
-              <path d="M15.41 7.41L14 6 6 12l8 8 1.41-1.41L10.83 12z" />
-            </svg>
-          </div>
-          <div className="slider-slide">
-            <div
-              className="slides-wrapper"
-              style={{
-                transform: `translateX(-${currentSlide * (80 / 6)}%)`,
-                width: `${slides.length * (100 / 6)}%`,
-              }}
-            >
-              {slides.map((slide, index) => (
-                <div
-                  key={index}
-                  className="slide-item"
-                  style={{ width: `${100 / slides.length}%` }}
-                >
-                  <img
-                    className="sliderimg"
-                    src={slide.image}
-                    alt={slide.title}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="slider-arrow next" onClick={handleNext}>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              style={{ fill: "#4682b4" }} // Blue color for next button
-            >
-              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-            </svg>
+      {/* slider two */}
+      <h1 className="Testimonials">Testimonials</h1>
+      <div className="slidertwo">
+        <div className="slidetwo">
+          <div className="testimonial">
+            <img
+              src={testimonials[currentSlidetwo].image}
+              alt={testimonials[currentSlidetwo].name}
+            />
+            <h3>{testimonials[currentSlidetwo].name}</h3>
+            <p>{testimonials[currentSlidetwo].title}</p>
+            <p className="quote">{testimonials[currentSlidetwo].quote}</p>
           </div>
         </div>
+        <button className="prevtwo" onClick={prevSlidetwo}>
+          &lt;
+        </button>
+        <button className="nexttwo" onClick={nextSlidetwo}>
+          &gt;
+        </button>
+        <div className="dots">
+          {testimonials.map((_, index) => (
+            <span
+              key={index}
+              className={index === currentSlidetwo ? "dot active" : "dot"}
+              onClick={() => setCurrentSlidetwo(index)}
+            />
+          ))}
+        </div>
       </div>
-      {/* slider black */}
+      {/* slider two end*/}
     </>
   );
 };
