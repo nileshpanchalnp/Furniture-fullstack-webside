@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import shoping_icon from "./imges/cart.svg";
 import hero_img from "./imges/hero-img.png";
 import dot_green from "./imges/dots-green.svg";
@@ -26,8 +27,29 @@ import Store_Kolkata from "./imges/store-Kolkata.png";
 import Store_Bangloe from "./imges/store-Bangloe.png";
 import Store_Delhi from "./imges/store-Delhi.png";
 import Store_Mumbai from "./imges/store-Mumbai.png";
+import person_1 from "./imges/person-1.jpg";
+import person_2 from "./imges/person-2.jpg";
+import person_3 from "./imges/person-3.jpg";
 
 const Home = () => {
+  // page Navigation
+  const navigate = useNavigate();
+
+  const [activePage, setActivepage] = useState("home");
+
+  const gotoHome = () => {
+    navigate("/");
+    setActivepage("home");
+  };
+  const gotoStore = () => {
+    navigate("/store");
+    setActivepage("store");
+  };
+  const gotoContact = () => {
+    navigate("/contact");
+    setActivepage("contact");
+  };
+  // page Navigation
   // slider1
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
@@ -62,7 +84,7 @@ const Home = () => {
       stores: "7 stores",
     },
   ];
-  // slldier two
+  // slldier one
   const [currentSlidetwo, setCurrentSlidetwo] = useState(0);
 
   const nextSlidetwo = () => {
@@ -76,7 +98,7 @@ const Home = () => {
       prevSlidetwo === 0 ? testimonials.length - 1 : prevSlidetwo - 1
     );
   };
-  // slider two
+  // slider one end
   // slidertwo
   const testimonials = [
     {
@@ -84,24 +106,21 @@ const Home = () => {
       title: "CEO, Co-Founder, XYZ Inc.",
       quote:
         '"Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque."',
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2HEOfGoes5UykClOXx0tFnksGKlOcqZiN2A&s", // Replace with actual image URL
+      image: person_1,
     },
     {
       name: "John Doe",
       title: "CTO, ABC Corp.",
       quote:
-        '"Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque."',
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjWFXEt8u3nfqCn_GjmZVucxSuKCJgICTnLw&s", // Replace with actual image URL
+        '"Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque."',
+      image: person_2,
     },
     {
       name: "Jane Smith",
       title: "CMO, Example Co.",
       quote:
-        '"Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque."',
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLl5qCjhAMm5yyRAcjXVS5P3RwzYDYWA7eag&s", // Replace with actual image URL
+        '"Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque. convallis volutpat dui quis scelerisque."',
+      image: person_3,
     },
   ];
   // slidertwo
@@ -117,7 +136,7 @@ const Home = () => {
       prevSlide === slides.length - 2 ? 0 : prevSlide + 2
     );
   };
-  // slider 2
+  // slider 2 end
 
   return (
     <>
@@ -127,7 +146,6 @@ const Home = () => {
           <ul>
             <li className="logo">Homebound.</li>
           </ul>
-          <p></p>
           <button
             className="navbar-toggler"
             type="button"
@@ -142,7 +160,12 @@ const Home = () => {
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto  mb-2 mb-lg-0 navtxt">
-              <li className="nav-item ml">Home</li>
+              <li
+                className={activePage === "home" ? "active" : ""}
+                onClick={gotoHome}
+              >
+                Home
+              </li>
               {/* Dropdown menu for "About us" with hover effect */}
               <li className="nav-item dropdown hover-dropdown">
                 <li
@@ -160,10 +183,14 @@ const Home = () => {
                   <li className="dropdown-item">Bed</li>
                 </ul>
               </li>
-              <li className="nav-item ataguse">Store</li>
-              <li className="nav-item">Contact us</li>
+              <li className="nav-item ataguse" onClick={gotoStore}>
+                Store
+              </li>
+              <li className="nav-item" onClick={gotoContact}>
+                Contact us
+              </li>
             </ul>
-            {/* stop */}
+
             <ul className="navbutton mt-3">
               <li>
                 <button type="button" className="btn btn-light loginhvr">
@@ -225,10 +252,6 @@ const Home = () => {
         </div>
       </div>
       {/* Hero */}
-
-      <br />
-      <br />
-      <br />
 
       {/* Section 1 */}
       <div className="sectionone">
@@ -294,11 +317,8 @@ const Home = () => {
         </div>
       </div>
       {/* section 2 WHy choose Us */}
-      <br />
-      <br />
-      <br />
 
-      <div className="slider container">
+      <div className="slider container mt-5 pt-3">
         <h2 className="slider-title">Visit Our Stores</h2>
         <div className="slider-container">
           <div className="slider-arrow prev" onClick={handlePrev}>
@@ -341,31 +361,16 @@ const Home = () => {
           </div>
           <div className="slider-arrow next" onClick={handleNext}>
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS81eTXlRLgV2Gfv4cl1vX0Bwj4oFu_PaM_AtDWe04Q6PKV_cS_o_sb7kt7hyYcJsNtsSk&usqp=CAU"
+              src="https://img.favpng.com/14/0/12/arrow-computer-icons-circle-clip-art-png-favpng-UqEzz51y7usvsrFfBsFntUDkY_t.jpg"
               style={{ height: "34px", width: "34px" }}
               alt=""
             />
-            {/* <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              style={{ fill: "#4682b4" }} // Blue color for next button
-            >
-              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-            </svg> */}
           </div>
         </div>
       </div>
 
       {/* slider black */}
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+
       <div className="sectiontwomain">
         <div className="sectiontwo container">
           <div className="whysec">
@@ -445,13 +450,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+
       {/* section 2 WHy choose Us end*/}
       {/* Slider Section */}
 
@@ -486,6 +485,9 @@ const Home = () => {
         </div>
       </div>
       {/* slider two end*/}
+      {/* section 4 we are helping model design*/}
+
+      {/* section 4 end */}
     </>
   );
 };

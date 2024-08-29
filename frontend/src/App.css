@@ -122,6 +122,9 @@ body {
   right: 70px;
 }
 /* new section 1 */
+.sectionone {
+  padding-top: 60px;
+}
 .seconemainbox {
   display: flex;
   flex-direction: column;
@@ -167,6 +170,9 @@ body {
   color: var(--navhover-text);
 }
 /* section 2 why choose us */
+.sectiontwomain {
+  margin-top: 200px;
+}
 .sectiontwo {
   display: flex;
   flex-direction: row;
@@ -311,6 +317,7 @@ body {
   padding: 20px;
 }
 .Testimonials {
+  margin-top: 180px;
   text-align: center;
 }
 
