@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import shoping_icon from "./imges/cart.svg";
 import hero_img from "./imges/hero-img.png";
 import dot_green from "./imges/dots-green.svg";
 import best_deal from "./imges/deal_zone_icon-1.svg";
@@ -30,25 +28,10 @@ import Store_Mumbai from "./imges/store-Mumbai.png";
 import person_1 from "./imges/person-1.jpg";
 import person_2 from "./imges/person-2.jpg";
 import person_3 from "./imges/person-3.jpg";
+import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 const Home = () => {
-  // page Navigation
-  const navigate = useNavigate();
-
-  const [activePage, setActivepage] = useState("home");
-
-  const gotoHome = () => {
-    navigate("/");
-    setActivepage("home");
-  };
-  const gotoStore = () => {
-    navigate("/store");
-    setActivepage("store");
-  };
-  const gotoContact = () => {
-    navigate("/contact");
-    setActivepage("contact");
-  };
   // page Navigation
   // slider1
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -140,84 +123,9 @@ const Home = () => {
 
   return (
     <>
-      {/* Navbar */}
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container mainnavbar">
-          <ul>
-            <li className="logo">Homebound.</li>
-          </ul>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <i className="fa-solid fa-bars bars"></i>
-          </button>
-
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto  mb-2 mb-lg-0 navtxt">
-              <li
-                className={activePage === "home" ? "active" : ""}
-                onClick={gotoHome}
-              >
-                Home
-              </li>
-              {/* Dropdown menu for "About us" with hover effect */}
-              <li className="nav-item dropdown hover-dropdown">
-                <li
-                  className=" dropdown-toggle"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Shop
-                </li>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li className="dropdown-item">Sofa</li>
-                  <li className="dropdown-item">Chair</li>
-                  <li className="dropdown-item">Bed</li>
-                </ul>
-              </li>
-              <li className="nav-item ataguse" onClick={gotoStore}>
-                Store
-              </li>
-              <li className="nav-item" onClick={gotoContact}>
-                Contact us
-              </li>
-            </ul>
-
-            <ul className="navbutton mt-3">
-              <li>
-                <button type="button" className="btn btn-light loginhvr">
-                  Login
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  className="btn btn-outline-light loginhvr"
-                >
-                  Sign up
-                </button>
-              </li>
-              <li className="nav-item card-icon">
-                <img
-                  src={shoping_icon}
-                  alt="Shopping icon"
-                  title="Shopping icon"
-                />
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      {/* Navbar */}
-
+      {/* navbar */}
+      <Navbar />
+      {/* navbar */}
       {/* Hero */}
       <div className="mainhero">
         <div className="hero container">
@@ -488,6 +396,13 @@ const Home = () => {
       {/* section 4 we are helping model design*/}
 
       {/* section 4 end */}
+      <br />
+      <br />
+      <br />
+      <br />
+      {/* footer */}
+      <Footer />
+      {/* footer */}
     </>
   );
 };
