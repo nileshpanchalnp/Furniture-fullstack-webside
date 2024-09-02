@@ -13,6 +13,27 @@
   --white: white;
   --body-bg: #eff2f1;
 }
+/* back to top button */
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 25px;
+  border: none;
+  outline: none;
+  height: 50px;
+  width: 50px;
+  background-color: var(--bgcolor);
+  color: var(--white);
+  cursor: pointer;
+  border-radius: 50%;
+}
+#myBtn:hover {
+  background-color: var(--smalltext);
+}
+/* back to top button */
 /* Navbar */
 .navbar {
   background-color: var(--bgcolor);
@@ -168,6 +189,15 @@
 .dealzonetxt {
   font-size: 14px;
   font-weight: 300;
+  /* text-decoration: none; */
+  color: var(--black);
+}
+.no-underline {
+  text-decoration: none;
+}
+.link-page {
+  margin-left: 12px;
+  text-decoration: none;
 }
 .bestdeal:hover {
   color: var(--navhover-text);

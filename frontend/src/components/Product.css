@@ -28,7 +28,7 @@
   justify-content: space-between;
 }
 .card {
-  height: 350px;
+  height: 380px;
   width: 300px;
   display: flex;
   flex-direction: column;

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import hero_img from "./imges/hero-img.png";
 import dot_green from "./imges/dots-green.svg";
 import best_deal from "./imges/deal_zone_icon-1.svg";
@@ -33,6 +34,32 @@ import Navbar from "./Navbar";
 
 const Home = () => {
   // page Navigation
+  // back to top button
+  // Get the button
+  useEffect(() => {
+    const mybutton = document.getElementById("myBtn");
+
+    const scrollFunction = () => {
+      if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+      ) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    };
+
+    window.onscroll = function () {
+      scrollFunction();
+    };
+  }, []);
+
+  const topFunction = () => {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+  };
+  // back to top button
   // slider1
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
@@ -160,6 +187,12 @@ const Home = () => {
         </div>
       </div>
       {/* Hero */}
+      {/* back to top button */}
+      <button onClick={topFunction} id="myBtn" title="Go to top">
+        <i className="fa-solid fa-circle-up" />
+      </button>
+
+      {/* back to top button */}
 
       {/* Section 1 */}
       <div className="sectionone">
@@ -179,16 +212,22 @@ const Home = () => {
               <p className="dealzonetxt mt-2">Store</p>
             </div>
             <div className="bestdeal">
-              <img src={sofa_icon} alt="Sofa" title="Sofa" />
-              <p className="dealzonetxt mt-2">Sofa</p>
+              <Link to="/sofa" className="no-underline">
+                <img src={sofa_icon} alt="Sofa" title="Sofa" />
+                <p className="dealzonetxt mt-2 link-page">Sofa</p>
+              </Link>
             </div>
             <div className="bestdeal">
-              <img src={bed_icon} alt="Bed" title="Bed" />
-              <p className="dealzonetxt mt-2">Bed</p>
+              <Link to="/bed" className="no-underline">
+                <img src={bed_icon} alt="Bed" title="Bed" />
+                <p className="dealzonetxt mt-2 link-page">Bed</p>
+              </Link>
             </div>
             <div className="bestdeal">
-              <img src={chair_icon} alt="Chair" title="Chair" />
-              <p className="dealzonetxt mt-2">Chair</p>
+              <Link to="/chair" className="no-underline">
+                <img src={chair_icon} alt="Chair" title="Chair" />
+                <p className="dealzonetxt mt-2 link-page">Chair</p>
+              </Link>
             </div>
             <div className="bestdeal">
               <img src={dining_table} alt="Dining Table" title="Dining Table" />
