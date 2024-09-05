@@ -1,0 +1,81 @@
+/* dashbord */
+.dashbox {
+  height: 660px;
+  width: 250px;
+  background-color: var(--bgcolor);
+  padding-top: 35px;
+  /* border-radius: 20px; */
+  color: var(--white);
+  position: fixed;
+  transition: width 0.3s ease;
+}
+
+.dashbox.collapsed {
+  width: 60px; /* Adjusted width for collapsed state */
+}
+
+.admin-dashbord-txt {
+  margin-left: 15px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.dashbox.collapsed h5 {
+  opacity: 0.5;
+}
+.dashbord-item {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.dashbord-item li {
+  margin-top: 10px;
+  height: 45px;
+  width: calc(100% - 0px); /* Full width minus padding */
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  list-style: none;
+
+  transition: padding 0.3s ease, width 0.3s ease;
+}
+
+.dashbox.collapsed .dashbord-item li {
+  /* padding-left: 5px; */
+  width: calc(100% - 30px); /* Adjusted width for collapsed state */
+}
+
+.font {
+  font-size: 18px;
+  padding-right: 9px;
+}
+
+.dashbord-item li:hover {
+  color: var(--navhover-text);
+}
+
+.dashbox.collapsed .dashbord-item li:hover {
+  color: var(--navhover-text);
+}
+.active {
+  color: var(--navhover-text);
+}
+/* dashbord */
+/* navbar */
+.navbar-right {
+  display: flex;
+  justify-content: end;
+}
+.navbar-admin {
+  position: fixed;
+  height: 75px;
+  width: 85%;
+  background-color: var(--bgcolor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+}
+/* navbar */

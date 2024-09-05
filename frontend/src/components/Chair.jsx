@@ -11,7 +11,7 @@ const Chair = () => {
 
   useEffect(() => {
     axios
-      .get("https://53w357tb-8000.inc1.devtunnels.ms/chair/get")
+      .get("https://53w357tb-4000.inc1.devtunnels.ms//chair/get")
       .then((response) => {
         console.log(response.data); // Log the response for debugging
         setChairs(response.data.data); // Adjust according to your API response structure
@@ -70,7 +70,7 @@ const Chair = () => {
             chairs.map((chair) => (
               <div className="card" key={chair._id}>
                 <img
-                  src={`https://53w357tb-8000.inc1.devtunnels.ms/chair/img/${chair.poster}`}
+                  src={`https://53w357tb-4000.inc1.devtunnels.ms//chair/img/${chair.poster}`}
                   alt={chair.chair_name}
                 />
                 <div className="card-item-name">
