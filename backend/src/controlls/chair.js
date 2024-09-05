@@ -1,12 +1,11 @@
 const { chairData } = require("../model/chair");
 const fs = require("fs");
 const path = require("path");
-
 const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "imgs"); // Ensure the path is correctly set
+    cb(null, path.join(__dirname, "../imgs")); // Ensure the path is correctly set
   },
   filename: function (req, file, cb) {
     const prefix = Date.now() + "-" + Math.round(Math.random() * 100000);
@@ -14,7 +13,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const upolad = multer({storage});
+const upolad = multer({ storage });
 
 const getChair = async (req, res) => {
   try {
@@ -35,7 +34,7 @@ const createChair = async (req, res) => {
     const chair_name = req_body["chair_name"];
     const option = req_body["option"];
     const price = req_body["price"];
-    const poster = req.file ? req.file.filename:" ";
+    const poster = req.file ? req.file.filename : " ";
     await chairData.create({
       chair_name,
       option,
@@ -61,7 +60,7 @@ const deleteChair = async (req, res) => {
       const poster = chair.poster;
       let poster_path = null;
       if (poster) {
-        poster_path = path.join(__dirname, "./imgs", poster);
+        poster_path = path.join(__dirname, "../imgs", poster);
         fs.unlinkSync(poster_path);
       }
       await chairData.deleteOne({ _id: id });
@@ -82,7 +81,7 @@ const updateChair = async (req, res) => {
     const { id } = req.params;
     const updateData = req.body;
 
-    const updatedChair = await Book.findByIdAndUpdate(id, updateData, {
+    const updatedChair = await chairData.findByIdAndUpdate(id, updateData, {
       new: true,
     });
 
