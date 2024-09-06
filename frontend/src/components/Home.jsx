@@ -208,8 +208,10 @@ const Home = () => {
               <p className="dealzonetxt mt-2">Deal Zone</p>
             </div>
             <div className="bestdeal">
-              <img src={store_icon} alt="Store" title="Store" />
-              <p className="dealzonetxt mt-2">Store</p>
+              <Link to="/store" className="no-underline">
+                <img src={store_icon} alt="Store" title="Store" />
+                <p className="dealzonetxt mt-2 link-page">Store</p>
+              </Link>
             </div>
             <div className="bestdeal">
               <Link to="/sofa" className="no-underline">

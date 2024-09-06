@@ -1,8 +1,9 @@
 import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import hero_img from "./imges/hero-img.png";
+import bed_hero from "./imges/bed-hero-img.png";
 import dot_green from "./imges/dots-green.svg";
+import sofa_one from "./imges/sofa-1.png";
 
 const Bed = () => {
   return (
@@ -37,12 +38,33 @@ const Bed = () => {
               alt="Decorative green dots"
               className="dotgreen"
             />
-            <img src={hero_img} alt="Hero Sofa" className="sofa" />
+            <img
+              src={bed_hero}
+              alt="Hero bed"
+              title="hero bed"
+              className="sofa bed-h-w"
+            />
           </div>
         </div>
       </div>
       {/* Hero */}
-
+      {/* card */}
+      <div className="main-card">
+        <div className="card-container container">
+          <div className="card">
+            <img src={sofa_one} alt="" />
+            <div className="card-item-name">
+              <p className="product-name">sofa</p>
+              <p>
+                500 Option <i class="fa-solid fa-circle circle-dot"></i> From{" "}
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+                1000
+              </p>
+            </div>
+          </div>
+          {/* card end */}
+        </div>
+      </div>
       <Footer />
     </>
   );

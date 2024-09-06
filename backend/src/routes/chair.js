@@ -1,4 +1,6 @@
 const express = require("express");
+const path = require("path");
+
 const {
   getChair,
   createChair,
@@ -9,7 +11,7 @@ const {
 
 const chair_route = express.Router();
 
-chair_route.use("/img", express.static("../imgs"));
+chair_route.use("/img", express.static(path.join(__dirname, "../imgs")));
 
 chair_route.get("/get", getChair);
 chair_route.post("/create", upolad.single("poster"), createChair);

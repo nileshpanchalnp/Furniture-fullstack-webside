@@ -8,8 +8,8 @@ export default function Dashbord() {
   const [activePage, setActivepage] = useState("dashbord");
   const [isMenuExpanded, setIsMenuExpanded] = useState(true); // State for toggling the menu
 
-  const gotoHome = () => {
-    navigate("/");
+  const gotoAdmin = () => {
+    navigate("/admin");
     setActivepage("dashbord");
   };
   const gotoChair = () => {
@@ -17,12 +17,12 @@ export default function Dashbord() {
     setActivepage("chairadmin");
   };
   const gotoAdminBed = () => {
-    navigate("/adminbed");
-    setActivepage("adminbed");
+    navigate("/bedadmin");
+    setActivepage("bedadmin");
   };
   const gotoSofa = () => {
-    navigate("/sofa");
-    setActivepage("sofa");
+    navigate("/sofaadmin");
+    setActivepage("sofaadmin");
   };
   const gotoNotification = () => {
     navigate("/notification");
@@ -49,8 +49,8 @@ export default function Dashbord() {
           <hr />
           <ul className="dashbord-item border-0">
             <li
-              className={activePage === "dashbord" ? "active" : ""}
-              onClick={gotoHome}
+              className={activePage === "admin" ? "active" : ""}
+              onClick={gotoAdmin}
             >
               <i className="fa-solid fa-square-poll-vertical font"></i>{" "}
               {isMenuExpanded && "Dashboard"}
@@ -65,13 +65,13 @@ export default function Dashbord() {
             </li>
             <li
               onClick={gotoAdminBed}
-              className={activePage === "adminbed" ? "active" : ""}
+              className={activePage === "bedadmin" ? "active" : ""}
             >
               <i class="fa-solid fa-bed"> </i> &nbsp; {isMenuExpanded && "Bed"}
             </li>
             <li
               onClick={gotoSofa}
-              className={activePage === "sofa" ? "active" : ""}
+              className={activePage === "sofaadmin" ? "active" : ""}
             >
               <i class="fa-solid fa-couch"></i>&nbsp;
               {isMenuExpanded && "Sofa"}

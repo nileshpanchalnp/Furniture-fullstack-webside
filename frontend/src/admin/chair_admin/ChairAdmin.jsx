@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./ChairAdmin.css";
+import Dashbord from "../Dashbord";
 
 const ChairAdmin = () => {
 
@@ -36,6 +37,7 @@ const ChairAdmin = () => {
   }
   return (
     <>
+    <Dashbord/>
       <div className="chair-form">
         <h1>Admin Chair</h1>
         <form onSubmit={handleCreateData} className="input-form">
@@ -64,6 +66,7 @@ const ChairAdmin = () => {
             type="file"
             accept="image/*"
             name="poster"
+            // value={poster}
             onChange={(e) => setPoster(e.target.files[0])} // Use the handleChange to update the state with the file
           />
           <button type="submit" className="btn btn-light" >

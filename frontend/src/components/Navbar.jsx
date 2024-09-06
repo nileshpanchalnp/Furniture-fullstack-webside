@@ -1,34 +1,35 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import shoping_icon from "./imges/cart.svg";
 
 const Navbar = () => {
-  // page Navigation
   const navigate = useNavigate();
+  const location = useLocation(); // Get current route location
+  const [activePage, setActivePage] = useState("home");
 
-  const [activePage, setActivepage] = useState("home");
+  useEffect(() => {
+    // Update activePage based on current path
+    const currentPath = location.pathname;
+    if (currentPath === "/") {
+      setActivePage("home");
+    } else if (currentPath === "/store") {
+      setActivePage("store");
+    } else if (currentPath === "/contact") {
+      setActivePage("contact");
+    } else if (currentPath === "/sofa") {
+      setActivePage("sofa");
+    } else if (currentPath === "/chair") {
+      setActivePage("chair");
+    } else if (currentPath === "/bed") {
+      setActivePage("bed");
+    }
+  }, [location]); // Runs when the route changes
 
-  const gotoHome = () => {
-    navigate("/");
-    setActivepage("home");
+  const gotoPage = (path, page) => {
+    navigate(path);
+    setActivePage(page);
   };
-  const gotoStore = () => {
-    navigate("/store");
-    setActivepage("store");
-  };
-  const gotoContact = () => {
-    navigate("/contact");
-    setActivepage("contact");
-  };
-  const gotoSofa = () => {
-    navigate("/sofa");
-  };
-  const gotoChair = () => {
-    navigate("/chair");
-  };
-  const gotoBed = () => {
-    navigate("/bed");
-  };
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -56,7 +57,7 @@ const Navbar = () => {
               <ul className="navbar-nav mb-2 mb-lg-0 navtxt">
                 <li
                   className={activePage === "home" ? "active" : ""}
-                  onClick={gotoHome}
+                  onClick={() => gotoPage("/", "home")}
                 >
                   Home
                 </li>
@@ -75,21 +76,36 @@ const Navbar = () => {
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdown"
                   >
-                    <li className="dropdown-item" onClick={gotoSofa}>
+                    <li
+                      className={activePage === "sofa" ? "active" : ""}
+                      onClick={() => gotoPage("/sofa", "sofa")}
+                    >
                       Sofa
                     </li>
-                    <li className="dropdown-item" onClick={gotoChair}>
+                    <li
+                      className={activePage === "chair" ? "active" : ""}
+                      onClick={() => gotoPage("/chair", "chair")}
+                    >
                       Chair
                     </li>
-                    <li className="dropdown-item" onClick={gotoBed}>
+                    <li
+                      className={activePage === "bed" ? "active" : ""}
+                      onClick={() => gotoPage("/bed", "bed")}
+                    >
                       Bed
                     </li>
                   </ul>
                 </li>
-                <li className="nav-item ataguse" onClick={gotoStore}>
+                <li
+                  className={activePage === "store" ? "active" : ""}
+                  onClick={() => gotoPage("/store", "store")}
+                >
                   Store
                 </li>
-                <li className="nav-item" onClick={gotoContact}>
+                <li
+                  className={activePage === "contact" ? "active" : ""}
+                  onClick={() => gotoPage("/contact", "contact")}
+                >
                   Contact us
                 </li>
               </ul>
@@ -120,7 +136,6 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      {/* Navbar */}
     </>
   );
 };

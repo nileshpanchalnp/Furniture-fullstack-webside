@@ -15,6 +15,7 @@ const storage = multer.diskStorage({
 
 const upolad = multer({ storage });
 
+
 const getChair = async (req, res) => {
   try {
     const data = await chairData.find();
