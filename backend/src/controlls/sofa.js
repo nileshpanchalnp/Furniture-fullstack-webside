@@ -1,4 +1,4 @@
-const { chairData } = require("../model/chair");
+const { sofaData } = require("../model/sofa");
 const fs = require("fs");
 const path = require("path");
 const multer = require("multer");
@@ -13,60 +13,58 @@ const storage = multer.diskStorage({
   },
 });
 
-const upolad = multer({ storage });
+const upload = multer({ storage });
 
-const getChair = async (req, res) => {
+const getSofa = async (req, res) => {
   try {
-    const data = await chairData.find();
+    const data = await sofaData.find();
     res.json({
       data: data,
     });
   } catch (error) {
     res.json({
-      erro: error,
+      error: error,
     });
   }
 };
-
-const createChair = async (req, res) => {
+const createSofa = async (req, res) => {
   try {
     const req_body = req.body;
-    const chair_name = req_body["chair_name"];
-    const option = req_body["option"];
-    const price = req_body["price"];
+    const sofa_name = req_body.sofa_name;
+    const option = req_body.option;
+    const price = req_body.price;
     const poster = req.file ? req.file.filename : " ";
-    await chairData.create({
-      chair_name,
+    await sofaData.create({
+      sofa_name,
       option,
       price,
       poster,
     });
 
     res.json({
-      msg: "chair detail create",
+      msg: "sofa Detail Create successful",
     });
   } catch (error) {
     res.json({
-      erro: error,
+      error: error,
     });
   }
 };
 
-const deleteChair = async (req, res) => {
+const deleteSofa = async (req, res) => {
   try {
     const { id } = req.params;
-    const chair = await chairData.findOne({ _id: id });
-    if (chair) {
-      const poster = chair.poster;
+    const sofa = await sofaData.findOne({ _id: id });
+    if (sofa) {
+      const poster = sofa.poster;
       let poster_path = null;
       if (poster) {
         poster_path = path.join(__dirname, "../imgs", poster);
         fs.unlinkSync(poster_path);
       }
-      await chairData.deleteOne({ _id: id });
-
+      await sofaData.deleteOne({ _id: id });
       res.json({
-        msg: " chair Data deleted successfully",
+        msg: "sofa data deleted Succesful",
       });
     }
   } catch (error) {
@@ -75,25 +73,24 @@ const deleteChair = async (req, res) => {
     });
   }
 };
-
-const updateChair = async (req, res) => {
+// update
+const updateSofa = async (req, res) => {
   try {
     const { id } = req.params;
     const updateData = req.body;
 
-    const updatedChair = await chairData.findByIdAndUpdate(id, updateData, {
+    const updatedSofa = await sofaData.findByIdAndUpdate(id, updateData, {
       new: true,
     });
-
-    if (!updatedChair) {
+    if (!updatedSofa) {
       return res.status(404).json({
-        msg: "Chair not found",
+        msg: "Sofa not found",
       });
     }
 
     res.json({
-      msg: "chair updated successfully",
-      data: updatedChair,
+      msg: "Sofa updated successfully",
+      data: updatedSofa,
     });
   } catch (error) {
     res.status(500).json({
@@ -102,4 +99,4 @@ const updateChair = async (req, res) => {
   }
 };
 
-module.exports = { getChair, createChair, upolad, deleteChair, updateChair };
+module.exports = { getSofa, createSofa, deleteSofa, updateSofa, upload };

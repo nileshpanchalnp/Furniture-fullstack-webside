@@ -8,7 +8,7 @@ const chairSchema = new mongoose.Schema({
     require: true,
   },
   poster: {
-    type: String, // Assuming poster is a string representing the file name or URL
+    type: String, 
     required: true,
   },
 });

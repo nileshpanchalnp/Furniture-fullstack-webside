@@ -65,7 +65,7 @@ const Chair = () => {
         </div>
       </div>
       {/* Hero */}
-      <h1 className="sofa-set">Chair</h1>
+      <h1 className="sofa-set">Chairs</h1>
       {/* Card */}
       <div className="main-card">
         <div className="card-container container">
@@ -80,8 +80,7 @@ const Chair = () => {
                 />
                 <div className="card-item-name">
                   <p className="product-name ">
-                    <i className="fa-solid fa-indian-rupee-sign"></i>
-                    {chair.chair_name}
+                     {chair.chair_name}
                   </p>
                   <p>
                     From. <i className="fa-solid fa-indian-rupee-sign"></i>{" "}
