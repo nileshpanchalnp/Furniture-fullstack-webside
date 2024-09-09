@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import bed_hero from "./imges/bed-hero-img.png";
 import dot_green from "./imges/dots-green.svg";
-import sofa_one from "./imges/sofa-1.png";
+// import sofa_one from "./imges/sofa-1.png";
+import axios from "axios";
 
 const Bed = () => {
+  const [beds, setBeds] = useState([]);
+  const [loading, setLoading] = useState(true); // Add a loading state
+
+  useEffect(() => {
+    axios
+      .get("https://53w357tb-4000.inc1.devtunnels.ms/bed/get")
+      .then((response) => {
+        console.log(response.data); // Log the response for debugging
+        setBeds(response.data.data); // Adjust according to your API response structure
+        setLoading(false); // Set loading to false after data is fetched
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the data!", error);
+        setLoading(false); // Set loading to false even if there's an error
+      });
+  }, []);
   return (
     <>
       <Navbar />
@@ -48,21 +65,34 @@ const Bed = () => {
         </div>
       </div>
       {/* Hero */}
-      {/* card */}
+      <h1 className="sofa-set">Beds</h1>
+
+      {/* Card */}
       <div className="main-card">
         <div className="card-container container">
-          <div className="card">
-            <img src={sofa_one} alt="" />
-            <div className="card-item-name">
-              <p className="product-name">sofa</p>
-              <p>
-                500 Option <i class="fa-solid fa-circle circle-dot"></i> From{" "}
-                <i class="fa-solid fa-indian-rupee-sign"></i>
-                1000
-              </p>
-            </div>
-          </div>
-          {/* card end */}
+          {loading ? ( // Show loading message if data is still being fetched
+            <h2>Loading beds...</h2>
+          ) : (
+            beds.map((bed) => (
+              <div className="card" key={bed._id}>
+                <img
+                  src={`https://53w357tb-4000.inc1.devtunnels.ms/bed/img/${bed.poster}`}
+                  alt={bed.bed_name}
+                />
+                <div className="card-item-name">
+                  <p className="product-name ">{bed.bed_name}</p>
+                  <p>
+                    From. <i className="fa-solid fa-indian-rupee-sign"></i>{" "}
+                    {bed.price} &nbsp;
+                    <del>
+                      <i className="fa-solid fa-indian-rupee-sign"></i>
+                      {bed.option}
+                    </del>{" "}
+                  </p>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
       <Footer />
