@@ -35,7 +35,7 @@ const Navbar = () => {
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container mainnavbar">
           <ul className="d-flex align-items-center">
-            <li className="logo">Homebound.</li>
+            <li className="logo">Artful Interiors.</li>
           </ul>
           <button
             className="navbar-toggler"
@@ -112,12 +112,13 @@ const Navbar = () => {
             </div>
 
             <ul className="navbutton d-flex align-items-center pt-3">
-              <li>
+              <li onClick={() => gotoPage("/login", "login")}>
                 <button type="button" className="btn btn-light loginhvr">
                   Login
                 </button>
               </li>
-              <li>
+
+              <li onClick={() => gotoPage("/signUp", "signUp")}>
                 <button
                   type="button"
                   className="btn btn-outline-light loginhvr signupbtn"
@@ -125,7 +126,10 @@ const Navbar = () => {
                   Sign up
                 </button>
               </li>
-              <li className="nav-item card-icon">
+              <li
+                className="nav-item card-icon"
+                onClick={() => gotoPage("/checkout", "checkout")}
+              >
                 <img
                   src={shoping_icon}
                   alt="Shopping icon"

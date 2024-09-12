@@ -30,7 +30,7 @@ const Footer = () => {
               <img src={footer_chair} alt="" />
             </div>
           </div>
-          <h2 className="ft-logo">Homebound.</h2>
+          <h2 className="ft-logo">Artful Interiors.</h2>
           <div className="footer-two">
             <div className="ft-item-one">
               <p>

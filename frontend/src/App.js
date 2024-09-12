@@ -8,6 +8,9 @@ import Store from "./components/Store";
 import Sofa from "./components/Sofa";
 import Bed from "./components/Bed";
 import Chair from "./components/Chair";
+import CheckOut from "./components/CheckOut";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
 
 function App() {
   return (
@@ -20,10 +23,14 @@ function App() {
         <Route path="/sofa" element={<Sofa />} />
         <Route path="/bed" element={<Bed />} />
         <Route path="/chair" element={<Chair />} />
-        <Route path="/admin" element={<Dashbord/>} />
+        <Route path="/checkout" element={<CheckOut />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/SignUp" element={<SignUp />} />
+
+        <Route path="/admin" element={<Dashbord />} />
       </Routes>
       {/* router */}
-        <AdminRoutes />
+      <AdminRoutes />
     </>
   );
 }
