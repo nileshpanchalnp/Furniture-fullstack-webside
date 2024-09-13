@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function Dashbord() {
   const navigate = useNavigate();
 
-  const [activePage, setActivepage] = useState("dashbord");
+  const [activePage, setActivepage] = useState("");
   const [isMenuExpanded, setIsMenuExpanded] = useState(true); // State for toggling the menu
 
   const gotoAdmin = () => {
