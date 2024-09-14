@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import "./Product.css";
 import hero_img from "./imges/hero-img.png";
 import dot_green from "./imges/dots-green.svg";
 // import sofa_one from "./imges/sofa-1.png";

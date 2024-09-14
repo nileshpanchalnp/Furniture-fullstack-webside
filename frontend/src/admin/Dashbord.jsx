@@ -24,9 +24,9 @@ export default function Dashbord() {
     navigate("/sofaadmin");
     setActivepage("sofaadmin");
   };
-  const gotoNotification = () => {
-    navigate("/notification");
-    setActivepage("notification");
+  const gotologinUserInfo = () => {
+    navigate("/loginUserInfo");
+    setActivepage("loginUserInfo");
   };
   const gotoProfile = () => {
     navigate("/profile");
@@ -77,11 +77,11 @@ export default function Dashbord() {
               {isMenuExpanded && "Sofa"}
             </li>
             <li
-              onClick={gotoNotification}
-              className={activePage === "notification" ? "active" : ""}
+              onClick={gotologinUserInfo}
+              className={activePage === "loginUserInfo" ? "active" : ""}
             >
               <i className="fa-solid fa-bell font"></i>{" "}
-              {isMenuExpanded && "Notification"}
+              {isMenuExpanded && "Login User Info"}
             </li>
             <li
               onClick={gotoProfile}
@@ -103,7 +103,7 @@ export default function Dashbord() {
       </div>
       <div className="navbar-right">
         <div className="navbar-admin">
-          <h2>hombord</h2>
+          <h2>Artful Interiors.</h2>
         </div>
       </div>
     </>
