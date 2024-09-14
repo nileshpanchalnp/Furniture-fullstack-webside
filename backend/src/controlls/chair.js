@@ -56,25 +56,40 @@ const deleteChair = async (req, res) => {
   try {
     const { id } = req.params;
     const chair = await chairData.findOne({ _id: id });
-    if (chair) {
-      const poster = chair.poster;
-      let poster_path = null;
-      if (poster) {
-        poster_path = path.join(__dirname, "../imgs", poster);
-        fs.unlinkSync(poster_path);
-      }
-      await chairData.deleteOne({ _id: id });
 
-      res.json({
-        msg: " chair Data deleted successfully",
-      });
+    if (!chair) {
+      return res.status(404).json({ msg: "Chair not found" });
     }
+
+    const poster = chair.poster;
+    if (poster) {
+      const poster_path = path.join(__dirname, "../imgs", poster);
+
+      // Check if the file exists before trying to delete
+      if (fs.existsSync(poster_path)) {
+        fs.unlink(poster_path, (err) => {
+          if (err) {
+            console.error("Failed to delete the file:", err);
+            return res
+              .status(500)
+              .json({ msg: "Failed to delete chair image" });
+          }
+        });
+      }
+    }
+
+    await chairData.deleteOne({ _id: id });
+
+    res.json({
+      msg: "Chair data deleted successfully",
+    });
   } catch (error) {
     res.status(500).json({
       error: error.message,
     });
   }
 };
+
 
 const updateChair = async (req, res) => {
   try {

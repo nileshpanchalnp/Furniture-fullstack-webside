@@ -76,6 +76,7 @@ const SofaAdmin = () => {
             </button>
           </form>
         </div>
+        
       </>
     );
 }
