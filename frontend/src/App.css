@@ -70,7 +70,10 @@
 .hover-dropdown .dropdown-menu {
   display: none;
 }
-
+.username-show {
+  padding-top: 15px;
+  font-size: 23px;
+}
 .navbaritem {
   display: flex;
   flex-direction: row;

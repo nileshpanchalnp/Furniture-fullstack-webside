@@ -1,10 +1,30 @@
 const express = require("express");
 const Users = require("../model/user");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+// JWT Auth Middleware
+const authToken = (req, res, next) => {
+  try {
+    const token = req.header("Authorization").split(" ")[1]; // Assuming the token is sent as "Bearer <token>"
+    if (!token) {
+      return res
+        .status(401)
+        .json({ msg: "No token provided, authorization denied" });
+    }
+    const verification = jwt.verify(token, "asdf@1234");
+    req.user = verification; // Attach decoded token to the request
+    next();
+  } catch (error) {
+    res.status(401).json({ msg: "Token is not valid" });
+  }
+};
+
+module.exports = { authToken };
 
 // Create User
 const createUser = async (req, res) => {
@@ -21,15 +41,15 @@ const createUser = async (req, res) => {
     res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     console.error("Can't Create User ", error);
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
-// Get All Users (Protected)
+// Get All Users (Protected route)
 const getUSer = async (req, res) => {
   try {
-    const user = await Users.find();
-    res.json(user);
+    const users = await Users.find();
+    res.json(users);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -42,7 +62,7 @@ const loginUser = async (req, res) => {
     if ((!email && !username) || !password) {
       return res
         .status(400)
-        .json({ message: "Username, Email and password are required" });
+        .json({ message: "Username/Email and password are required" });
     }
     const user = await Users.findOne({
       $or: [{ email }, { username }],
@@ -53,14 +73,19 @@ const loginUser = async (req, res) => {
     if (user.password !== password) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
-    res.status(200).json({ message: "Login successful", user });
+
+    // Generate JWT Token
+    const tokenData = { id: user._id, username: user.username };
+    const token = jwt.sign(tokenData, "asdf@1234", { expiresIn: "10m" });
+
+    res.status(200).json({ message: "Login successful", token, user });
   } catch (error) {
     console.error("Can't Login User ", error);
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
-// Delete User (New Functionality)
+// Delete User
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.params; // Get user ID from URL params

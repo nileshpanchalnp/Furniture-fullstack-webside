@@ -1,11 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import shoping_icon from "./imges/cart.svg";
+import axios from "axios";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation(); // Get current route location
   const [activePage, setActivePage] = useState("home");
+  const [userName, setUser] = useState(null); // Change to a single object instead of an array
+
+  useEffect(() => {
+    axios
+      .get("https://53w357tb-4000.inc1.devtunnels.ms/user/get")
+      .then((response) => {
+        console.log(response.data);
+        setUser(response.data); // Assuming response.data is the user object
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the data!", error);
+      });
+  }, []);
 
   useEffect(() => {
     // Update activePage based on current path
@@ -110,6 +124,13 @@ const Navbar = () => {
                 </li>
               </ul>
             </div>
+
+            {/* Show username if available */}
+            {userName && (
+              <div className="username-show">
+                <p>Hii! {userName.username}</p>
+              </div>
+            )}
 
             <ul className="navbutton d-flex align-items-center pt-3">
               <li onClick={() => gotoPage("/login", "login")}>
