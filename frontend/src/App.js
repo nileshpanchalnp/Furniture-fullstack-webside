@@ -17,7 +17,7 @@ function App() {
     <>
       {/* router */}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/store" element={<Store />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/sofa" element={<Sofa />} />
@@ -25,7 +25,7 @@ function App() {
         <Route path="/chair" element={<Chair />} />
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/" element={<SignUp />} />
 
         <Route path="/admin" element={<Dashbord />} />
       </Routes>

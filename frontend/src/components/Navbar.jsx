@@ -1,28 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import shoping_icon from "./imges/cart.svg";
-import axios from "axios";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation(); // Get current route location
   const [activePage, setActivePage] = useState("home");
-  const [userName, setUser] = useState(null); // Change to a single object instead of an array
-
-  useEffect(() => {
-    axios
-      .get("https://53w357tb-4000.inc1.devtunnels.ms/user/get")
-      .then((response) => {
-        console.log(response.data);
-        setUser(response.data); // Assuming response.data is the user object
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the data!", error);
-      });
-  }, []);
+  const [userName, setUser] = useState(""); // Change to a single object instead of an array
 
   useEffect(() => {
     // Update activePage based on current path
+    const Username = Cookies.get("User");
+    setUser(Username);
     const currentPath = location.pathname;
     if (currentPath === "/") {
       setActivePage("home");
@@ -42,6 +32,15 @@ const Navbar = () => {
   const gotoPage = (path, page) => {
     navigate(path);
     setActivePage(page);
+  };
+
+  // Logout function to clear user session and redirect
+  const handleLogout = () => {
+    Cookies.remove("User"); // Remove the user cookie
+    localStorage.removeItem("token"); // Optionally, remove any token if stored in localStorage
+    setUser(""); // Clear user from state
+    navigate("/"); // Redirect to the sign-up page
+    alert("logOut Succeful");
   };
 
   return (
@@ -68,10 +67,10 @@ const Navbar = () => {
             id="navbarSupportedContent"
           >
             <div className="navitemcenter d-flex justify-content-center w-100">
-              <ul className="navbar-nav mb-2 mb-lg-0 navtxt">
+              <ul className="navbar-nav mb-2 mb-lg-0 navtxt ">
                 <li
                   className={activePage === "home" ? "active" : ""}
-                  onClick={() => gotoPage("/", "home")}
+                  onClick={() => gotoPage("/home", "home")}
                 >
                   Home
                 </li>
@@ -87,7 +86,7 @@ const Navbar = () => {
                     Shop
                   </li>
                   <ul
-                    className="dropdown-menu"
+                    className="dropdown-menu nav-dropdown-section-menu"
                     aria-labelledby="navbarDropdown"
                   >
                     <li
@@ -128,25 +127,11 @@ const Navbar = () => {
             {/* Show username if available */}
             {userName && (
               <div className="username-show">
-                <p>Hii! {userName.username}</p>
+                <p>Hii!&nbsp;{userName}</p>
               </div>
             )}
 
             <ul className="navbutton d-flex align-items-center pt-3">
-              <li onClick={() => gotoPage("/login", "login")}>
-                <button type="button" className="btn btn-light loginhvr">
-                  Login
-                </button>
-              </li>
-
-              <li onClick={() => gotoPage("/signUp", "signUp")}>
-                <button
-                  type="button"
-                  className="btn btn-outline-light loginhvr signupbtn"
-                >
-                  Sign up
-                </button>
-              </li>
               <li
                 className="nav-item card-icon"
                 onClick={() => gotoPage("/checkout", "checkout")}
@@ -157,7 +142,49 @@ const Navbar = () => {
                   title="Shopping icon"
                 />
               </li>
+              <li onClick={() => gotoPage("/", "signUp")}>
+                <button
+                  type="button"
+                  className="btn btn-outline-light loginhvr signupbtn"
+                >
+                  Sign up
+                </button>
+              </li>
             </ul>
+            <div className="dropdown nav-dropdown-last">
+              <button
+                className="btn btn-outline-light dropdown-toggle nav-dropdown-last-btn"
+                type="button"
+                id="dropdownMenuButton"
+                data-bs-toggle="dropdown" // Change data-toggle to data-bs-toggle
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Login
+              </button>
+              <ul
+                className="dropdown-menu nav-last-drop-menu"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <li onClick={() => gotoPage("/login", "login")}>
+                  <button type="button" className="btn btn-light nav-login-btn">
+                    Login
+                  </button>
+                </li>
+                <li onClick={() => gotoPage("/admin", "admin")}>
+                  {" "}
+                  <button type="button" className="btn btn-light nav-login-btn">
+                    Admin
+                  </button>
+                </li>
+
+                <li onClick={handleLogout}>
+                  <button type="button" className="btn btn-light nav-login-btn">
+                    LogOut
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </nav>

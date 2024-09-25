@@ -70,9 +70,32 @@
 .hover-dropdown .dropdown-menu {
   display: none;
 }
+.nav-dropdown-section-menu {
+  height: 80px;
+  width: 50px;
+}
 .username-show {
   padding-top: 15px;
-  font-size: 23px;
+  font-size: 15px;
+}
+.nav-dropdown-last-btn:hover {
+  background-color: var(--navhover-text);
+  color: var(--black);
+}
+.nav-dropdown-last-btn {
+  font-size: 16px;
+  color: var(--white);
+  background-color: var(--bgcolor);
+}
+.nav-dropdown-last {
+  cursor: pointer;
+  margin-left: 10px;
+}
+.nav-login-btn:hover {
+  background-color: var(--navhover-text);
+}
+.nav-last-drop-menu {
+  width: 100px;
 }
 .navbaritem {
   display: flex;
@@ -463,7 +486,7 @@
   flex-direction: row;
   gap: 15px;
 }
-.brand-logo p {
+.brand-logo i {
   height: 35px;
   width: 35px;
   background-color: var(--body-bg);
@@ -476,7 +499,7 @@
   align-items: center;
   transition: transform 0.4s linear;
 }
-.brand-logo p:hover {
+.brand-logo i:hover {
   background-color: var(--bgcolor);
   color: var(--white);
   transform: rotate(360deg);

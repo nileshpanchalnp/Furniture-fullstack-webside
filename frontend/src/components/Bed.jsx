@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Footer from "./footer/Footer";
 import bed_hero from "./imges/bed-hero-img.png";
 import dot_green from "./imges/dots-green.svg";
-// import sofa_one from "./imges/sofa-1.png";
 import axios from "axios";
 
 const Bed = () => {
   const [beds, setBeds] = useState([]);
   const [loading, setLoading] = useState(true); // Add a loading state
 
+  // Get JWT token from localStorage
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     axios
-      .get("https://53w357tb-4000.inc1.devtunnels.ms/bed/get")
+      .get("https://53w357tb-4000.inc1.devtunnels.ms/bed/get", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Attach token to the request
+        },
+      })
       .then((response) => {
         console.log(response.data); // Log the response for debugging
         setBeds(response.data.data); // Adjust according to your API response structure
@@ -22,7 +28,8 @@ const Bed = () => {
         console.error("There was an error fetching the data!", error);
         setLoading(false); // Set loading to false even if there's an error
       });
-  }, []);
+  }, [token]);
+
   return (
     <>
       <Navbar />
@@ -70,7 +77,7 @@ const Bed = () => {
       {/* Card */}
       <div className="main-card">
         <div className="card-container container">
-          {loading ? ( // Show loading message if data is still being fetched
+          {loading ? (
             <h2>Loading beds...</h2>
           ) : (
             beds.map((bed) => (

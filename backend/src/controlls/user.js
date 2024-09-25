@@ -76,7 +76,7 @@ const loginUser = async (req, res) => {
 
     // Generate JWT Token
     const tokenData = { id: user._id, username: user.username };
-    const token = jwt.sign(tokenData, "asdf@1234", { expiresIn: "10m" });
+    const token = jwt.sign(tokenData, "asdf@1234", { expiresIn: "1h" });
 
     res.status(200).json({ message: "Login successful", token, user });
   } catch (error) {

@@ -15,10 +15,17 @@ const BedAdmin = () => {
   const [editMode, setEditMode] = useState(false); // Track if we're in edit mode
   const [currentBedId, setCurrentBedId] = useState(null); // Track the bed being edited
 
+  // Get JWT token from localStorage (or wherever it's stored)
+  const token = localStorage.getItem("token");
+
   // Fetch the bed data from the API
   useEffect(() => {
     axios
-      .get("https://53w357tb-4000.inc1.devtunnels.ms/bed/get")
+      .get("https://53w357tb-4000.inc1.devtunnels.ms/bed/get", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Attach token to the request
+        },
+      })
       .then((response) => {
         console.log(response.data); // Log the response for debugging
         setBeds(response.data.data); // Adjust according to your API response structure
@@ -28,7 +35,7 @@ const BedAdmin = () => {
         console.error("There was an error fetching the data!", error);
         setLoading(false); // Set loading to false even if there's an error
       });
-  }, []);
+  }, [token]);
 
   // Function to create or update a bed
   const handleCreateOrUpdate = async (e) => {
@@ -51,6 +58,7 @@ const BedAdmin = () => {
           {
             headers: {
               "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`, // Attach token to the request
             },
           }
         );
@@ -64,6 +72,7 @@ const BedAdmin = () => {
           {
             headers: {
               "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`, // Attach token to the request
             },
           }
         );
@@ -79,7 +88,11 @@ const BedAdmin = () => {
 
       // Fetch updated bed data
       axios
-        .get("https://53w357tb-4000.inc1.devtunnels.ms/bed/get")
+        .get("https://53w357tb-4000.inc1.devtunnels.ms/bed/get", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Attach token to the request
+          },
+        })
         .then((response) => {
           setBeds(response.data.data);
         });
@@ -93,7 +106,12 @@ const BedAdmin = () => {
   const deleteBed = async (id) => {
     try {
       await axios.delete(
-        `https://53w357tb-4000.inc1.devtunnels.ms/bed/delete/${id}`
+        `https://53w357tb-4000.inc1.devtunnels.ms/bed/delete/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Attach token to the request
+          },
+        }
       );
       alert("Bed deleted successfully");
 

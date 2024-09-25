@@ -1,0 +1,54 @@
+.mainfooter {
+  background-color: #f8f9fa;
+  padding: 20px 0;
+}
+
+.footer-top .ft-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ft-input input {
+  flex: 1;
+}
+
+.ft-one-img img {
+  max-width: 100%;
+}
+
+.brand-logo a {
+  margin: 0 10px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.brand-logo a:hover {
+  color: #007bff;
+}
+
+@media (max-width: 768px) {
+  .footer-two {
+    text-align: center;
+  }
+
+  .brand-logo a {
+    margin: 0 15px;
+  }
+
+  .footer-two p {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-two h2 {
+    font-size: 1.5rem;
+  }
+
+  .footer-three hr {
+    margin: 2rem 0;
+  }
+
+  .nilesh {
+    font-size: 1rem;
+  }
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Footer from "./footer/Footer";
 import hero_img from "./imges/hero-img.png";
 import dot_green from "./imges/dots-green.svg";
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function SignUp() {
@@ -11,6 +11,8 @@ function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
+  const navigate = useNavigate(); // Use useNavigate to programmatically navigate
+
   const CreateUser = async (e) => {
     e.preventDefault();
 
@@ -20,12 +22,13 @@ function SignUp() {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("firstname", firstname);
-    formData.append("lastname", lastname);
-    formData.append("username", username);
-    formData.append("email", email);
-    formData.append("password", password);
+    const formData = {
+      firstname,
+      lastname,
+      username,
+      email,
+      password,
+    };
 
     try {
       await axios.post(
@@ -47,7 +50,9 @@ function SignUp() {
       setConfirmPassword("");
       setError("");
 
+      // Display success alert and navigate to home page
       alert("Registration Success");
+      navigate("/login"); // Navigate to home page after successful registration
     } catch (error) {
       console.error("Error:", error);
       alert("User could not be created. Please try again.");

@@ -29,7 +29,7 @@ import Store_Mumbai from "./imges/store-Mumbai.png";
 import person_1 from "./imges/person-1.jpg";
 import person_2 from "./imges/person-2.jpg";
 import person_3 from "./imges/person-3.jpg";
-import Footer from "./Footer";
+import Footer from "./footer/Footer";
 import Navbar from "./Navbar";
 
 const Home = () => {

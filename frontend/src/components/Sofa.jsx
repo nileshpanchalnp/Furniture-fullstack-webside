@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Footer from "./footer/Footer";
 import hero_img from "./imges/hero-img.png";
 import dot_green from "./imges/dots-green.svg";
-// import sofa_one from "./imges/sofa-1.png";
 import axios from "axios";
 
 const Sofa = () => {
@@ -11,8 +10,14 @@ const Sofa = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const token = localStorage.getItem("token"); // Retrieve the JWT token from localStorage
+
     axios
-      .get("https://53w357tb-4000.inc1.devtunnels.ms/sofa/get")
+      .get("https://53w357tb-4000.inc1.devtunnels.ms/sofa/get", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
+        },
+      })
       .then((response) => {
         console.log(response.data); // Log the response for debugging
         setSofa(response.data.data); // Adjust according to your API response structure
@@ -23,6 +28,7 @@ const Sofa = () => {
         setLoading(false); // Set loading to false even if there's an error
       });
   }, []);
+
   return (
     <>
       <Navbar />
@@ -74,14 +80,12 @@ const Sofa = () => {
                   alt={sofa.sofa_name}
                 />
                 <div className="card-item-name">
-                  <p className="product-name">
-                     {sofa.sofa_name}
-                  </p>
+                  <p className="product-name">{sofa.sofa_name}</p>
                   <p>
                     From. <i className="fa-solid fa-indian-rupee-sign"></i>{" "}
                     {sofa.price} &nbsp;
                     <del>
-                      <i className="fa-solid fa-indian-rupee-sign"></i>
+                      <i className="fa-solid fa-indian-rupee-sign"></i>{" "}
                       {sofa.option}
                     </del>
                   </p>
@@ -93,8 +97,6 @@ const Sofa = () => {
           )}
         </div>
       </div>
-      {/* second card */}
-      {/* hero */}
 
       <Footer />
     </>

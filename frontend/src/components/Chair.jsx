@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
-// import daco from "./imges/Daco_6032921.png"
+import Footer from "./footer/Footer";
 import chair_hero from "./imges/chair-hero.png";
-
-// import hero_img from "./imges/hero-img.png";
 import dot_green from "./imges/dots-green.svg";
 
 const Chair = () => {
@@ -13,8 +10,14 @@ const Chair = () => {
   const [loading, setLoading] = useState(true); // Add a loading state
 
   useEffect(() => {
+    const token = localStorage.getItem("token"); // Retrieve token from localStorage
+
     axios
-      .get("https://53w357tb-4000.inc1.devtunnels.ms/chair/get")
+      .get("https://53w357tb-4000.inc1.devtunnels.ms/chair/get", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token to the Authorization header
+        },
+      })
       .then((response) => {
         console.log(response.data); // Log the response for debugging
         setChairs(response.data.data); // Adjust according to your API response structure
@@ -60,7 +63,12 @@ const Chair = () => {
               alt="Decorative green dots"
               className="dotgreen"
             />
-            <img src={chair_hero} alt="Hero chair" title="hero chair"  className="sofa chair-h-w" />
+            <img
+              src={chair_hero}
+              alt="Hero chair"
+              title="hero chair"
+              className="sofa chair-h-w"
+            />
           </div>
         </div>
       </div>
@@ -69,7 +77,7 @@ const Chair = () => {
       {/* Card */}
       <div className="main-card">
         <div className="card-container container">
-          {loading ? ( // Show loading message if data is still being fetched
+          {loading ? (
             <h2>Loading Chairs...</h2>
           ) : (
             chairs.map((chair) => (
@@ -79,9 +87,7 @@ const Chair = () => {
                   alt={chair.chair_name}
                 />
                 <div className="card-item-name">
-                  <p className="product-name ">
-                     {chair.chair_name}
-                  </p>
+                  <p className="product-name ">{chair.chair_name}</p>
                   <p>
                     From. <i className="fa-solid fa-indian-rupee-sign"></i>{" "}
                     {chair.price} &nbsp;

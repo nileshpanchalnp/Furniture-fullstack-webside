@@ -22,8 +22,14 @@ const ChairAdmin = () => {
 
   // Fetch chairs from API
   const fetchChairs = () => {
+    const token = localStorage.getItem("token"); // Retrieve token from localStorage
+
     axios
-      .get("https://53w357tb-4000.inc1.devtunnels.ms/chair/get")
+      .get("https://53w357tb-4000.inc1.devtunnels.ms/chair/get", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token to the Authorization header
+        },
+      })
       .then((response) => {
         setChairs(response.data.data);
         setLoading(false);
@@ -37,6 +43,8 @@ const ChairAdmin = () => {
   // Create or update chair
   const handleCreateOrUpdate = async (e) => {
     e.preventDefault();
+
+    const token = localStorage.getItem("token"); // Retrieve token from localStorage
 
     const formData = new FormData();
     formData.append("chair_name", chair_name);
@@ -57,6 +65,7 @@ const ChairAdmin = () => {
           {
             headers: {
               "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`, // Include the JWT token
             },
           }
         );
@@ -70,6 +79,7 @@ const ChairAdmin = () => {
           {
             headers: {
               "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`, // Include the JWT token
             },
           }
         );
@@ -96,8 +106,14 @@ const ChairAdmin = () => {
 
   // Handle delete action
   const deleteChair = (id) => {
+    const token = localStorage.getItem("token"); // Retrieve token from localStorage
+
     axios
-      .delete(`https://53w357tb-4000.inc1.devtunnels.ms/chair/delete/${id}`)
+      .delete(`https://53w357tb-4000.inc1.devtunnels.ms/chair/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the JWT token
+        },
+      })
       .then((response) => {
         fetchChairs(); // Refresh the chair list after deletion
       })

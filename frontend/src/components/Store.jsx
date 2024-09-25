@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Footer from "./footer/Footer";
 import visit_store from "./imges/Visit_store__Store_page.jpg";
 import store_main_header from "./imges/Store-main_page-header.jpg";
 import city_1 from "./imges/store-city-1.png";

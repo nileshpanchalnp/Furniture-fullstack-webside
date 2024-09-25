@@ -7,8 +7,15 @@ export default function LoginUser() {
   const [User, setUser] = useState([]);
 
   useEffect(() => {
+    // Retrieve token from local storage or session storage
+    const token = localStorage.getItem("token"); // Or sessionStorage.getItem("token")
+
     axios
-      .get("https://53w357tb-4000.inc1.devtunnels.ms/user/get")
+      .get("https://53w357tb-4000.inc1.devtunnels.ms/user/get", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+        },
+      })
       .then((response) => {
         console.log(response.data);
         setUser(response.data);
@@ -20,11 +27,15 @@ export default function LoginUser() {
 
   // Function to handle delete action
   const deleteUser = (id) => {
+    const token = localStorage.getItem("token");
     axios
-      .delete(`https://53w357tb-4000.inc1.devtunnels.ms/user/delete/${id}`)
+      .delete(`https://53w357tb-4000.inc1.devtunnels.ms/user/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the delete request
+        },
+      })
       .then((response) => {
         console.log("User deleted", response);
-        // Update the user list after deletion
         setUser(User.filter((user) => user._id !== id));
       })
       .catch((error) => {

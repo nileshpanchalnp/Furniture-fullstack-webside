@@ -9,6 +9,7 @@ const authToken = (req, res, next) => {
   } catch (error) {
     res.json({
       msg: "token is not valid",
+      code: 12345,
     });
   }
 };

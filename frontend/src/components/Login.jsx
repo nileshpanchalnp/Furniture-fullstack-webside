@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,10 +22,14 @@ const Login = () => {
       if (response.data.token) {
         // Store the JWT token in localStorage
         localStorage.setItem("token", response.data.token);
+        console.log("token", response.data.token);
+        console.log("Login user", response.data.user.username);
+        var User = response.data.user.username;
+        Cookies.set("User", User);
         alert("Login successful!");
 
         // Redirect to a different page, e.g., dashboard or home
-        navigate("/"); // Adjust this path based on your routes
+        navigate("/home"); // Adjust this path based on your routes
       } else {
         alert("Login failed!");
       }
@@ -91,7 +96,7 @@ const Login = () => {
                   </div>
                   <p className="text-center  mt-5 mb-0">
                     Don't have an account?{" "}
-                    <Link to="/signUp" className="fw-bold ">
+                    <Link to="/" className="fw-bold ">
                       <u>SignUp here</u>
                     </Link>
                   </p>

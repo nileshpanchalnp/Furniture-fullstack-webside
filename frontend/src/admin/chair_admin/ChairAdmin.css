@@ -4,9 +4,7 @@
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
 }
-body {
-  /* background-color: rgb(128, 203, 141); */
-}
+
 .chair-form {
   display: flex;
   flex-direction: column;
@@ -19,7 +17,7 @@ body {
 
 .chair-form form {
   height: 400px;
-  width: 400px;
+  width: 700px;
   background-color: var(--bgcolor);
   margin-bottom: 70px;
 }
@@ -28,9 +26,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   gap: 20px;
 }
 .input-form input {
+  width: 500px;
   border-radius: 5px;
   background-color: var(--body-bg);
 }

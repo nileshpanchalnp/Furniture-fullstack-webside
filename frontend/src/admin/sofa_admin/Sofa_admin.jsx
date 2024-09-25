@@ -15,10 +15,17 @@ const SofaAdmin = () => {
   const [editMode, setEditMode] = useState(false); // Track if we're in edit mode
   const [currentSofaId, setCurrentSofaId] = useState(null); // Track the sofa being edited
 
+  // Retrieve the token from localStorage (or any secure storage you're using)
+  const token = localStorage.getItem("token");
+
   // Fetch sofas from the server
   useEffect(() => {
     axios
-      .get("https://53w357tb-4000.inc1.devtunnels.ms/sofa/get")
+      .get("https://53w357tb-4000.inc1.devtunnels.ms/sofa/get", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
+        },
+      })
       .then((response) => {
         console.log(response.data); // Log the response for debugging
         setSofa(response.data.data); // Adjust according to your API response structure
@@ -28,7 +35,7 @@ const SofaAdmin = () => {
         console.error("There was an error fetching the data!", error);
         setLoading(false); // Set loading to false even if there's an error
       });
-  }, []);
+  }, [token]);
 
   // Create or update sofa
   const handleCreateOrUpdate = async (e) => {
@@ -51,6 +58,7 @@ const SofaAdmin = () => {
           {
             headers: {
               "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`, // Include the JWT token
             },
           }
         );
@@ -64,6 +72,7 @@ const SofaAdmin = () => {
           {
             headers: {
               "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`, // Include the JWT token
             },
           }
         );
@@ -79,7 +88,11 @@ const SofaAdmin = () => {
 
       // Fetch updated sofa data
       axios
-        .get("https://53w357tb-4000.inc1.devtunnels.ms/sofa/get")
+        .get("https://53w357tb-4000.inc1.devtunnels.ms/sofa/get", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the JWT token
+          },
+        })
         .then((response) => {
           setSofa(response.data.data);
         });
@@ -93,7 +106,12 @@ const SofaAdmin = () => {
   const deleteSofa = async (id) => {
     try {
       await axios.delete(
-        `https://53w357tb-4000.inc1.devtunnels.ms/sofa/delete/${id}`
+        `https://53w357tb-4000.inc1.devtunnels.ms/sofa/delete/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the JWT token
+          },
+        }
       );
       alert("Sofa deleted successfully");
 
@@ -219,4 +237,3 @@ const SofaAdmin = () => {
 };
 
 export default SofaAdmin;
-  
