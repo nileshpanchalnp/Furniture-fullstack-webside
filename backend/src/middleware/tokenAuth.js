@@ -3,7 +3,7 @@ const authToken = (req, res, next) => {
   try {
     const token = req.header("Authorization").split(" ")[1];
     let verification = null;
-    verification = jwt.verify(token, "asdf@1234");
+    verification = jwt.verify(token, process.env.JWT_SECRET);
     req.token = token;
     next();
   } catch (error) {

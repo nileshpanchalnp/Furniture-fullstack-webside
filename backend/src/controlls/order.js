@@ -6,6 +6,20 @@ const cors = require("cors");
 const app = express();
 
 app.use(cors());
+app.use(express.json());
+
+const verifyToken = (req, res, next) => {
+  const token = req.header("Authorization").split(" ")[1]; // Extracting token
+  if (!token) return res.status(401).send("Access Denied");
+
+  try {
+    const verified = jwt.verify(token, process.env.JWT_SECRET); // Verify token
+    req.user = verified;
+    next();
+  } catch (err) {
+    res.status(400).send("Invalid Token");
+  }
+};
 
 const checkOut = async (req, res) => {
   const { poster, product_name, price, quantity, username } = req.body;
@@ -30,10 +44,10 @@ const checkOut = async (req, res) => {
       });
       res
         .status(201)
-        .json({ message: "Order processed successfully", order: newOrder });
+        .json({ message: "Product added to cart", order: newOrder });
     }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: 'Error adding to cart', error: error.message });
   }
 };
 
@@ -46,4 +60,4 @@ const getOrder = async (req, res) => {
   }
 };
 
-module.exports = { checkOut, getOrder };
+module.exports = { checkOut, getOrder, verifyToken };

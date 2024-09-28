@@ -77,9 +77,9 @@ const Bed = () => {
       {/* Card */}
       <div className="main-card">
         <div className="card-container container">
-          {loading ? (
+          {loading ? ( // Show loading indicator while data is being fetched
             <h2>Loading beds...</h2>
-          ) : (
+          ) : Array.isArray(beds) && beds.length > 0 ? ( // If not loading, check if beds exist
             beds.map((bed) => (
               <div className="card" key={bed._id}>
                 <img
@@ -87,18 +87,20 @@ const Bed = () => {
                   alt={bed.bed_name}
                 />
                 <div className="card-item-name">
-                  <p className="product-name ">{bed.bed_name}</p>
+                  <p className="product-name">{bed.bed_name}</p>
                   <p>
                     From. <i className="fa-solid fa-indian-rupee-sign"></i>{" "}
                     {bed.price} &nbsp;
                     <del>
-                      <i className="fa-solid fa-indian-rupee-sign"></i>
+                      <i className="fa-solid fa-indian-rupee-sign"></i>{" "}
                       {bed.option}
-                    </del>{" "}
+                    </del>
                   </p>
                 </div>
               </div>
             ))
+          ) : (
+            <h2>No beds available</h2> // If beds is empty or undefined
           )}
         </div>
       </div>

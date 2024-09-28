@@ -77,9 +77,9 @@ const Chair = () => {
       {/* Card */}
       <div className="main-card">
         <div className="card-container container">
-          {loading ? (
-            <h2>Loading Chairs...</h2>
-          ) : (
+          {loading ? ( // Show loading indicator while data is being fetched
+            <h2>Loading chairs...</h2>
+          ) : Array.isArray(chairs) && chairs.length > 0 ? ( // If not loading, check if chairs exist
             chairs.map((chair) => (
               <div className="card" key={chair._id}>
                 <img
@@ -87,18 +87,20 @@ const Chair = () => {
                   alt={chair.chair_name}
                 />
                 <div className="card-item-name">
-                  <p className="product-name ">{chair.chair_name}</p>
+                  <p className="product-name">{chair.chair_name}</p>
                   <p>
                     From. <i className="fa-solid fa-indian-rupee-sign"></i>{" "}
                     {chair.price} &nbsp;
                     <del>
-                      <i className="fa-solid fa-indian-rupee-sign"></i>
+                      <i className="fa-solid fa-indian-rupee-sign"></i>{" "}
                       {chair.option}
-                    </del>{" "}
+                    </del>
                   </p>
                 </div>
               </div>
             ))
+          ) : (
+            <h2>No chairs available</h2> // If chairs is empty or undefined
           )}
         </div>
       </div>
