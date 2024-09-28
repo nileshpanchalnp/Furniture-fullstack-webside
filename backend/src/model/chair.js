@@ -8,11 +8,11 @@ const chairSchema = new mongoose.Schema({
     require: true,
   },
   poster: {
-    type: String, 
+    type: String,
     required: true,
   },
 });
 
 const chairData = mongoose.model("chairData", chairSchema);
 
-module.exports = {chairData};
+module.exports = { chairData };
