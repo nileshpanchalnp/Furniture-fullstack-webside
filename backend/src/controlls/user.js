@@ -1,11 +1,6 @@
 const express = require("express");
 const Users = require("../model/user");
-const cors = require("cors");
 const jwt = require("jsonwebtoken");
-
-const app = express();
-app.use(express.json());
-app.use(cors());
 
 // JWT Auth Middleware
 const authToken = (req, res, next) => {

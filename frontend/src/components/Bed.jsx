@@ -4,10 +4,14 @@ import Footer from "./footer/Footer";
 import bed_hero from "./imges/bed-hero-img.png";
 import dot_green from "./imges/dots-green.svg";
 import axios from "axios";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const Bed = () => {
   const [beds, setBeds] = useState([]);
   const [loading, setLoading] = useState(true); // Add a loading state
+  const navigate = useNavigate();
+
 
   // Get JWT token from localStorage
   const token = localStorage.getItem("token");
@@ -29,6 +33,66 @@ const Bed = () => {
         setLoading(false); // Set loading to false even if there's an error
       });
   }, [token]);
+
+ const addToCart = async (item) => {
+   const Username = Cookies.get("User"); // Assuming this is the username cookie
+   if (!Username) {
+     alert("🙏Please login to add items to the cart.");
+     navigate("/login"); // Redirect to login page
+     return;
+   }
+
+   try {
+     const quantity = 1; // Fixed quantity as 1
+     const totalAmount = item.price * quantity; // Correct calculation
+     // Logging for debugging
+     console.log("Price:", item.price);
+     console.log("Total Amount:", totalAmount);
+
+     const response = await axios.post(
+       "https://53w357tb-4000.inc1.devtunnels.ms/checkout/order", // Your backend URL
+       {
+         itemId: item._id,
+         bed_name: item.bed_name,
+         price: item.price,
+         poster: item.poster,
+         quantity: quantity, // Set quantity to 1
+         username: Username,
+         totalAmount: totalAmount, // Correctly calculated totalAmount
+       }
+     );
+
+     if (response.data) {
+       // Successful response
+       console.log(response.data);
+       alert("Item added successfully!");
+       navigate("/checkout", {
+         state: { cartItem: { ...item, quantity: 1 } },
+       });
+     } else {
+       alert(
+         `⚠️ Failed to add item to cart: ${
+           response.data.message || "Unknown error"
+         }`
+       );
+     }
+   } catch (error) {
+     console.error("Error adding item to cart:", error);
+
+     // Checking if the error contains response information for better handling
+     if (error.response) {
+       alert(
+         `⚠️ Failed to add item to cart: ${
+           error.response.data.message || "Server error"
+         }`
+       );
+     } else {
+       alert("⚠️ Failed to add item to cart: Network or server error");
+     }
+   }
+ };
+
+
 
   return (
     <>
@@ -81,7 +145,11 @@ const Bed = () => {
             <h2>Loading beds...</h2>
           ) : Array.isArray(beds) && beds.length > 0 ? ( // If not loading, check if beds exist
             beds.map((bed) => (
-              <div className="card" key={bed._id}>
+              <div
+                className="card"
+                key={bed._id}
+                onClick={() => addToCart(bed)}
+              >
                 <img
                   src={`https://53w357tb-4000.inc1.devtunnels.ms/bed/img/${bed.poster}`}
                   alt={bed.bed_name}
