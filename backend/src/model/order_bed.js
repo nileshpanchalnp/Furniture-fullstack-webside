@@ -19,7 +19,11 @@ const orderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  // username:string,
+  username:String,
+  // user: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "Users",
+  // },
 });
 
 const Order = mongoose.model("Order", orderSchema);

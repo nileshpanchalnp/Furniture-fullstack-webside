@@ -18,9 +18,13 @@ const { Order } = require("../model/order_bed");
 
 // CheckOut function to create a new order
 const checkOut = async (req, res) => {
-  console.log(req.body);
-  const { bed_name, quantity, price, poster } = req.body;
+  // console.log(req.body);
+
+  const { bed_name, quantity, price, poster, username } = req.body;
+
   // const poster = req.file ? req.file.filename : " ";
+  // const user = req.user["id"];
+  // console.log(user);
   const totalAmount = price * quantity; // Calculate total amount based on quantity and price
 
   try {
@@ -30,6 +34,7 @@ const checkOut = async (req, res) => {
       quantity,
       price,
       totalAmount,
+      username,
     });
     res
       .status(201)
